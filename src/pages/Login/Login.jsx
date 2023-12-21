@@ -16,7 +16,7 @@ const Login = () => {
 
     return (
         <HelmetProvider>
-            <Helmet><title>Parcel Point | Login</title></Helmet>
+            <Helmet><title>SwiftTasks | Login</title></Helmet>
             <div className="w-11/12 mx-auto mt-20">
                 <div className="flex mx-auto flex-col gap-4 lg:flex-row md:px-4">
                     <div className="w-full lg:w-1/2">
