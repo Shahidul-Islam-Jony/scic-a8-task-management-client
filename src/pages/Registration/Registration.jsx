@@ -1,14 +1,15 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import regImg from "../../assets/images/registration.jpg"
 import { ToastContainer, toast } from "react-toastify";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import { FcGoogle } from 'react-icons/fc';
 
 const Registration = () => {
-
-    const { createUser, updateUser } = useContext(AuthContext);
+    const { createUser, updateUser, loginWithGoogle } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleRegistration = e => {
         e.preventDefault();
@@ -59,7 +60,9 @@ const Registration = () => {
                             timer: 1500
                         });
                         // set user info in database   
-                        console.log('user updated');
+
+                        // navigate user
+                        navigate('/dashboard')
                     })
                     .catch(error => {
                         toast.error(`${error}`, {
@@ -89,7 +92,35 @@ const Registration = () => {
                 });
                 return;
             })
+    }
 
+    const handleLoginWithGoogle = () => {
+        loginWithGoogle()
+            .then(result => {
+                console.log(result);
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Login successful",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate('/dashboard')
+
+            })
+            .catch(error => {
+                toast.error(`${error}`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                return;
+            })
     }
 
     return (
@@ -136,7 +167,10 @@ const Registration = () => {
                                 </div>
                             </form>
                             {/* social login here*/}
-
+                            <div>
+                                <div className="divider">OR</div>
+                                <button onClick={handleLoginWithGoogle} className='btn btn-outline w-full text-lg border-blue-600 capitalize'><FcGoogle className='text-3xl mr-4'></FcGoogle>Login With Google</button>
+                            </div>
                         </div>
                     </div>
                 </div>
