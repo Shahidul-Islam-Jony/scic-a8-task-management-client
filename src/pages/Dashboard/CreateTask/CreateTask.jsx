@@ -3,11 +3,12 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../providers/AuthProvider";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { ToastContainer, toast } from "react-toastify";
 
 
 const CreateTask = () => {
     const { user } = useContext(AuthContext);
-    console.log(user);
+    // console.log(user);
     const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const onSubmit = (data) => {
@@ -24,8 +25,32 @@ const CreateTask = () => {
         axiosPublic.post('/addTasks', tasks)
             .then(res => {
                 console.log(res);
+                if (res.status === 200) {
+                    toast.success('Task added Successful !', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                }
             })
-
+            .catch(error => {
+                toast.error(`${error}`, {
+                    position: "center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                return;
+            })
     }
     return (
         <HelmetProvider>
@@ -76,7 +101,7 @@ const CreateTask = () => {
                         </div>
                     </div>
                 </div>
-                {/* <ToastContainer></ToastContainer> */}
+                <ToastContainer></ToastContainer>
             </div>
         </HelmetProvider>
     );
