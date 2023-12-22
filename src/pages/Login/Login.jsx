@@ -1,17 +1,46 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import loginImg from '../../assets/images/login.png'
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
+import { ToastContainer, toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const Login = () => {
-
+    const { login } = useContext(AuthContext);
 
     const handleLogin = e => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email,password);
-        
+        // console.log(email,password);
+
+        login(email, password)
+            .then(result => {
+                console.log(result);
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: "Login successful",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
+            })
+            .catch(error => {
+                toast.error(`${error}`, {
+                    position: "center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                return;
+            })
     }
 
     return (
@@ -49,6 +78,7 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
+                <ToastContainer></ToastContainer>
             </div>
         </HelmetProvider>
     );

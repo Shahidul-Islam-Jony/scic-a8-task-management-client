@@ -52,7 +52,7 @@ const Registration = () => {
                 updateUser(name, photoUrl)
                     .then(() => {
                         Swal.fire({
-                            position: "top-center",
+                            position: "center",
                             icon: "success",
                             title: "Registration successful",
                             showConfirmButton: false,
