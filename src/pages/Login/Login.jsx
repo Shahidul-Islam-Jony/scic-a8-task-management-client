@@ -1,13 +1,14 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import loginImg from '../../assets/images/login.png'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
 import Swal from "sweetalert2";
 
 const Login = () => {
-    const { login } = useContext(AuthContext);
+    const { login, user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleLogin = e => {
         e.preventDefault();
@@ -20,13 +21,13 @@ const Login = () => {
             .then(result => {
                 console.log(result);
                 Swal.fire({
-                    position: "top-center",
+                    position: "center",
                     icon: "success",
                     title: "Login successful",
                     showConfirmButton: false,
                     timer: 1500
                 });
-
+                navigate(user&&'/dashboard')
             })
             .catch(error => {
                 toast.error(`${error}`, {
