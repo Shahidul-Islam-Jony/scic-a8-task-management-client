@@ -1,20 +1,95 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import regImg from "../../assets/images/registration.jpg"
+import { ToastContainer, toast } from "react-toastify";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Registration = () => {
+
+    const { createUser, updateUser } = useContext(AuthContext);
 
     const handleRegistration = e => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
         const email = form.email.value;
-        const phoneNumber = form.phoneNumber.value;
         const photoUrl = form.photo.value;
-        const type = form.type.value;
         const password = form.password.value;
-        console.log(name,email,photoUrl,password,type,phoneNumber);
-    
+        // console.log(name,email,photoUrl,password,type,phoneNumber);
+
+        if (password.length < 6) {
+            toast.error('Password should be 6 character or longer!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return;
+        }
+        if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,32}$/.test(password)) {
+            toast.error('Password should have atleast one Capital letter one small letter and one special character !', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return;
+        }
+        // console.log(name,email,photoUrl,password);
+        createUser(email, password)
+            .then(result => {
+                console.log(result);
+                updateUser(name, photoUrl)
+                    .then(() => {
+                        Swal.fire({
+                            position: "top-center",
+                            icon: "success",
+                            title: "Registration successful",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        // set user info in database   
+                        console.log('user updated');
+                    })
+                    .catch(error => {
+                        toast.error(`${error}`, {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        });
+                        return;
+                    })
+
+            })
+            .catch(error => {
+                toast.error(`${error}`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                return;
+            })
+
     }
 
     return (
@@ -61,11 +136,11 @@ const Registration = () => {
                                 </div>
                             </form>
                             {/* social login here*/}
-                            
+
                         </div>
                     </div>
                 </div>
-                {/* <ToastContainer></ToastContainer> */}
+                <ToastContainer></ToastContainer>
             </div>
         </HelmetProvider>
     );
