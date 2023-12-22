@@ -12,7 +12,7 @@ const Dashboard = () => {
             <NavLink onClick={() => setActive(false)} className="bg-white py-1 pl-4 md:mx-2 rounded-lg text-lg font-medium hover:bg-gray-300" to='/dashboard/createTask'>Create New Task</NavLink>
             <NavLink onClick={() => setActive(false)} className="bg-white py-1 pl-4 md:mx-2 rounded-lg text-lg font-medium hover:bg-gray-300" to='/dashboard/previousTasks'>Previous Tasks</NavLink>
             <NavLink onClick={() => setActive(false)} className="bg-white py-1 pl-4 md:mx-2 rounded-lg text-lg font-medium hover:bg-gray-300" to='/dashboard/manageTasks'>Manage Tasks</NavLink>
-            <NavLink onClick={() => setActive(false)} className="bg-white py-1 pl-4 md:mx-2 rounded-lg text-lg font-medium hover:bg-gray-300" to='myProfile'>My Profile</NavLink>
+            <NavLink onClick={() => setActive(false)} className="bg-white py-1 pl-4 md:mx-2 rounded-lg text-lg font-medium hover:bg-gray-300" to='/dashboard/myProfile'>My Profile</NavLink>
         </div>
     </>
 
