@@ -8,6 +8,7 @@ import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import PrivateRoute from "./PrivateRoute";
 import CreateTask from "../pages/Dashboard/CreateTask/CreateTask";
 import ManageTasks from "../pages/Dashboard/ManageTasks/ManageTasks";
+import UpdateTask from "../pages/Dashboard/UpdateTask/UpdateTask";
 
 
 const router = createBrowserRouter([
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
             {
                 path: 'manageTasks',
                 element: <ManageTasks></ManageTasks>
+            },
+            {
+                path:'updateTask/:id',
+                element:<UpdateTask></UpdateTask>
             }
         ]
     }
