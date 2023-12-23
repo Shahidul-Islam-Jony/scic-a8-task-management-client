@@ -10,6 +10,8 @@ import CreateTask from "../pages/Dashboard/CreateTask/CreateTask";
 import ManageTasks from "../pages/Dashboard/ManageTasks/ManageTasks";
 import UpdateTask from "../pages/Dashboard/UpdateTask/UpdateTask";
 import PreviousTask from "../pages/Dashboard/PreviousTask/PreviousTask";
+import Support from "../pages/Support/Support";
+import Tasks from "../pages/Tasks/Tasks";
 
 
 const router = createBrowserRouter([
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
             {
                 path: 'registration',
                 element: <Registration></Registration>
+            },
+            {
+                path:'support',
+                element:<Support></Support>
+            },
+            {
+                path:'tasks',
+                element:<Tasks></Tasks>
             }
         ]
     },
