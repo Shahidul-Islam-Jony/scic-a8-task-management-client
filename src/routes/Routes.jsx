@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 import CreateTask from "../pages/Dashboard/CreateTask/CreateTask";
 import ManageTasks from "../pages/Dashboard/ManageTasks/ManageTasks";
 import UpdateTask from "../pages/Dashboard/UpdateTask/UpdateTask";
+import PreviousTask from "../pages/Dashboard/PreviousTask/PreviousTask";
 
 
 const router = createBrowserRouter([
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
             {
                 path:'updateTask/:id',
                 element:<UpdateTask></UpdateTask>
+            },
+            {
+                path:'previousTasks',
+                element:<PreviousTask></PreviousTask>
             }
         ]
     }

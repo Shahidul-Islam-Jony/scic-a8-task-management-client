@@ -17,7 +17,7 @@ const ManageTasks = () => {
             return res.data;
         }
     })
-
+    console.log(data);
     if(isLoading){
         return <span className="loading loading-spinner loading-lg"></span>
     }
@@ -46,6 +46,7 @@ const ManageTasks = () => {
                         progress: undefined,
                         theme: "light",
                     });
+                    refetch();
                 }
             })
             .catch(error => {
