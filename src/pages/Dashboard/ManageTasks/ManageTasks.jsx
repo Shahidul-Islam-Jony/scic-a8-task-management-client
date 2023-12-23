@@ -68,7 +68,7 @@ const ManageTasks = () => {
     return (
         <div className="">
             <h1 className="text-5xl text-center font-medium">Manage Tasks</h1>
-            <div className="grid grid-cols-3 justify-between mt-10 gap-7">
+            <div className="grid grid-cols-1 md:grid-cols-3 justify-between mt-10 gap-7">
                 <div className="border-2 rounded-lg border-pink-500 min-h-screen">
                     <h3 className="text-xl font-medium text-center rounded-lg bg-green-300 p-2">TODO</h3>
                     {
